@@ -25,7 +25,7 @@ async function readDir(dir) {
             }kb`
           );
         } else {
-          console.log(`${file.name} - ${stat.size / 1000}kb`);
+          console.log(`${file.name} - ${stat.size / 1024}kb`);
         }
       } else {
         readDir(path.join(dir, file.name));

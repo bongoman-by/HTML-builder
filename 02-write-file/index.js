@@ -7,7 +7,8 @@ const pathFile = path.resolve(__dirname, 'text.txt');
 const output = fs.createWriteStream(pathFile);
 
 function init() {
-  fs.writeFile(pathFile, '', () => {
+  fs.writeFile(pathFile, '', (err) => {
+    if (err) throw err;
     stdout.write('Cоздан новый файл. Введите новое сообщение:\n');
   });
 }
@@ -15,7 +16,6 @@ function init() {
 fs.access('text.txt', fs.F_OK, (err) => {
   if (err) {
     init();
-    return;
   }
 });
 
