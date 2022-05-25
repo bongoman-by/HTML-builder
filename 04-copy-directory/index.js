@@ -10,18 +10,12 @@ async function copyDir(dir) {
     if (file.isFile()) {
       if (dir !== __dirname) {
         try {
-          await fsPromises.access(
+          await fsPromises.copyFile(
+            path.join(dir, file.name),
             path.join(dir.replace(source, destination), file.name)
           );
-        } catch {
-          try {
-            await fsPromises.copyFile(
-              path.join(dir, file.name),
-              path.join(dir.replace(source, destination), file.name)
-            );
-          } catch (err) {
-            console.log(err);
-          }
+        } catch (err) {
+          console.log(err);
         }
       }
     } else {
