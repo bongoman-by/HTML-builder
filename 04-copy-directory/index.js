@@ -46,8 +46,19 @@ async function copyDir(dir) {
   }
 }
 
+async function deleteDir(dir) {
+  const files = await fsPromises.readdir(dir, { withFileTypes: true });
+  for (const file of files) {
+    if (!file.isFile() && file.name.includes('copy', file.name - 5)) {
+      await fsPromises.rm(path.join(dir, file.name), { recursive: true }, () =>
+        console.log('delete directory')
+      );
+    }
+  }
+}
+
 try {
-  copyDir(__dirname);
+  deleteDir(__dirname).then(() => copyDir(__dirname));
 } catch (error) {
   console.error('catch error: ' + error.message);
 }
