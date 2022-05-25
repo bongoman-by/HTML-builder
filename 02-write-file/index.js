@@ -23,6 +23,9 @@ stdin.on('data', (data) => {
   const message = data.toString();
   if (message === '\r\n') {
     stdout.write('Нужно ввести новое сообщение:\n');
+  } else if (message === 'exit\r\n') {
+    stdout.write('Ваши сообщения записаны.');
+    exit();
   } else {
     output.write(message);
     stdout.write('Введите новое сообщение:\n');
